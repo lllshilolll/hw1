@@ -24,11 +24,23 @@ public class HomeWork {
      * @param list односвязный список
      * @param pred условие
      * @param <T>  - тип хранимых значений в списке
-     * @return количество узлов от 0 до N, где N позиция на которой первый раз условие вернуло fals
+     * @return количество узлов от 0 до N, где N позиция на которой первый раз условие вернуло false
      */
     public <T> int partitionBy(Node<T> list, Predicate<T> pred) {
-        //TODO реализовать метод
-        return 0;
+        if (list == null || pred == null) {
+            throw new RuntimeException("Не переданы обязательные аргументы");
+        }
+        int count = 0;
+        do {
+            if (pred.test(list.getValue())) {
+                count++;
+            } else {
+                return count;
+            }
+            list = list.getNext();
+        }
+        while (list != null);
+        return count;
     }
 
     /**
@@ -41,6 +53,17 @@ public class HomeWork {
      * @return сам элемент
      */
     public <T> T findNthElement(Node<T> list, int n) {
-        return null;
+        if(list == null){
+            throw new RuntimeException("список должен содержать хотябы 1 элемент");
+        }
+        if (n >= list.size) {
+            throw new RuntimeException("позиция искомого элемента больше размера: " + list.size);
+        } else if (n < 0) {
+            throw new RuntimeException("позиция искомого элемента должна быть больше 0");
+        }
+        for (int i = 0; i < n; i++) {
+            list = list.getNext();
+        }
+        return list.getValue();
     }
 }

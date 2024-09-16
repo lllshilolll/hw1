@@ -18,8 +18,11 @@ public class Node<T> {
 
     private Node<T> next;
 
+    int size = 0;
+
     public Node(T value) {
         this.value = value;
+        size++;
     }
 
     public Node<T> add(T value) {
@@ -27,8 +30,10 @@ public class Node<T> {
         while (emptyNode.getNext() != null) {
             emptyNode = emptyNode.getNext();
         }
+
         Node<T> newNode = new Node<>(value);
         emptyNode.setNext(newNode);
+        size++;
         return newNode;
     }
 }
